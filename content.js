@@ -1,12 +1,14 @@
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  let allTags = document.body.getElementsByTagName("a");
+  const secures = Math.floor(Math.random() * allTags.length) + 1;
+  const unSecures = Math.floor(Math.random() * allTags.length) + 1;
   if (request === "all") {
-    const matches = document.body.getElementsByTagName("a");
-    sendResponse({ count: matches.length });
+    sendResponse({ count: allTags.length });
   }
   if (request === "unsecure") {
-    sendResponse({ count: 99 });
+    sendResponse({ count: unSecures });
   }
   if (request === "secure") {
-    sendResponse({ count: 99 });
+    sendResponse({ count: secures });
   }
 });

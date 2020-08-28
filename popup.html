@@ -13,20 +13,50 @@
 
   <body>
     <div class="container">
+      <span class="d-block p-2 bg-primary text-white font-weight-light">
+        <div>LINKERSECURE</div>
+        <div>
+          <img
+            src="./images/nav.png"
+            style="
+              position: absolute;
+              right: 0px;
+              top: 3px;
+              width: 38px;
+              height: 38px;
+            "
+          />
+        </div>
+      </span>
+      <!-- <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand text-monospace" href="www.martinbj.me">
+          <img
+            src="./images/nav.png"
+            width="30"
+            height="30"
+            class="d-inline-block align-top"
+            alt=""
+            loading="lazy"
+          />
+          UnsecureLinker
+        </a>
+      </nav> -->
       <!-- BUTTONS -->
-      <div class="row">
+      <div class="row" style="margin-top: 30px">
         <div class="col-4">
-          <button id="btnUnsecure" type="button" class="btn btn-danger">
+          <button id="btnUnsecure" type="button" class="btn_linker red">
             Unsecures
           </button>
         </div>
         <div class="col-4">
-          <button id="btnSecure" type="button" class="btn btn-success">
+          <button id="btnSecure" type="button" class="btn_linker green">
             Secures
           </button>
         </div>
         <div class="col-4">
-          <button id="btnAll" type="button" class="btn btn-primary">All</button>
+          <button id="btnAll" type="button" class="btn_linker primary">
+            All
+          </button>
         </div>
       </div>
       <!-- LOADERS -->

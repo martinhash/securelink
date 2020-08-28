@@ -18,7 +18,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function setCountAll(res) {
     clean();
     $("#txtAll").removeClass("none");
-    $("#txtAll").html(`This page have ${res.count} Links`);
+    if (res) {
+      $("#txtAll").html(`This page have ${res.count} Links`);
+    } else {
+      $("#txtAll").html(`This page not have links`);
+    }
   }
 
   //UNSECURES FUNCTION
@@ -30,7 +34,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function setCountUnsecure(res) {
     clean();
     $("#txtUnsecure").removeClass("none");
-    $("#txtUnsecure").html(`This page have ${res.count} Unsecure Links`);
+    if (res) {
+      $("#txtUnsecure").html(`This page have ${res.count} Unsecure Links`);
+    } else {
+      $("#txtUnsecure").html(`This page not have links`);
+    }
   }
 
   //SECURES FUNCTION
@@ -42,7 +50,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function setCountSecure(res) {
     clean();
     $("#txtSecure").removeClass("none");
-    $("#txtSecure").html(`This page have ${res.count} Secure Links`);
+    if (res) {
+      $("#txtSecure").html(`This page have ${res.count} Secure Links`);
+    } else {
+      $("#txtSecure").html(`This page not have links`);
+    }
   }
 
   //CLEAN ALL LINKER TEXTS

@@ -1,7 +1,31 @@
 .container {
   width: 300px;
   height: 200px;
+  margin: 0px;
+  padding: 0px;
 }
 .none {
   display: none;
+}
+.btn_linker {
+  border: none;
+  padding: 10px 0px;
+  border-radius: 3px;
+  font-weight: lighter;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+}
+.red {
+  color: mediumvioletred;
+}
+.blue {
+  color: mediumvioletred;
+}
+.alert {
+  position: absolute !important;
+  bottom: 0px !important;
+  width: 100% !important;
+  margin: 0px !important;
 }
