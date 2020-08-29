@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  //dom
   document
     .querySelector("#btnAll")
     .addEventListener("click", getAllLinks, false);
@@ -9,11 +10,16 @@ document.addEventListener("DOMContentLoaded", function () {
     .querySelector("#btnSecure")
     .addEventListener("click", getSecureLinks, false);
   var title;
+  getAllLinks();
   chrome.tabs.getSelected(null, function (tab) {
     title = tab.title;
-    console.log(title, className);
+    $("#titleTab").html(
+      `<b style="font-size: 0.8em;
+      text-transform: uppercase;
+      padding: 0px;">${title}</b>`
+    );
   });
-  //ALL LINKS FUNCTION
+  //ALL LINKS FUNCTIONS
   function getAllLinks() {
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
       chrome.tabs.sendMessage(tabs[0].id, "all", setCountAll);
@@ -25,17 +31,33 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#loadingAll").removeClass("none");
     setTimeout(() => {
       enabledButtons();
-      $("#loadingAll").addClass("none");
-      $("#txtAll").removeClass("none");
-      if (res) {
-        $("#txtAll").html(`<b>${title}</b> <br> Total of ${res.count} Links`);
-      } else {
-        $("#txtAll").html(`<b>${title}</b> <br> not have links`);
-      }
+      appearAllStuff(res);
     }, 1000);
   }
+  function appearAllStuff(res) {
+    $("#btnAll").addClass("btn-focus");
+    $("#loadingAll").addClass("none");
+    $("#listAll").removeClass("none");
+    if (res.unsecuredLinks.length > 0) {
+      res.unsecuredLinks.forEach((unSecuredLink) => {
+        $("#listAll").append(
+          `<li class="list-group-item list-unsecured">${unSecuredLink.href}</li>`
+        );
+      });
+    }
+    if (res.securedLinks.length > 0) {
+      res.securedLinks.forEach((securedLink) => {
+        $("#listAll").append(
+          `<li class="list-group-item list-secured">${securedLink.href}</li>`
+        );
+      });
+    }
+    if (res.securedLinks.length + res.unsecuredLinks.length > 5) {
+      $(".list-group").addClass("scroll");
+    }
+  }
 
-  //UNSECURES FUNCTION
+  //UNSECURES FUNCTIONS
   function getUnsecureLinks() {
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
       chrome.tabs.sendMessage(tabs[0].id, "unsecure", setCountUnsecure);
@@ -47,16 +69,24 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#loadingUnsecure").removeClass("none");
     setTimeout(() => {
       enabledButtons();
-      $("#loadingUnsecure").addClass("none");
-      $("#txtUnsecure").removeClass("none");
-      if (res) {
-        $("#txtUnsecure").html(
-          `<b>${title}</b> <br> ${res.count} Unsecure Links`
-        );
-      } else {
-        $("#txtUnsecure").html(`<b>${title}</b> <br> not have links`);
-      }
+      appearUnsecureStuff(res);
     }, 1000);
+  }
+
+  function appearUnsecureStuff(res) {
+    $("#btnUnsecure").addClass("btn-focus");
+    $("#loadingUnsecure").addClass("none");
+    $("#listUnsecure").removeClass("none");
+    if (res.unsecuredLinks.length > 0) {
+      if (res.unsecuredLinks.length > 5) {
+        $(".list-group").addClass("scroll");
+      }
+      res.unsecuredLinks.forEach((link) => {
+        $("#listUnsecure").append(
+          `<li class="list-group-item list-unsecured">${link.href}</li>`
+        );
+      });
+    }
   }
 
   //SECURES FUNCTION
@@ -71,14 +101,24 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#loadingSecure").removeClass("none");
     setTimeout(() => {
       enabledButtons();
-      $("#loadingSecure").addClass("none");
-      $("#txtSecure").removeClass("none");
-      if (res) {
-        $("#txtSecure").html(`<b>${title}</b> <br> ${res.count} Secure Links`);
-      } else {
-        $("#txtSecure").html(`<b>${title}</b> <br> not have links`);
-      }
+      appearSecureStuff(res);
     }, 1000);
+  }
+
+  function appearSecureStuff(res) {
+    $("#btnSecure").addClass("btn-focus");
+    $("#loadingSecure").addClass("none");
+    $("#listSecure").removeClass("none");
+    if (res.securedLinks.length > 0) {
+      if (res.securedLinks.length > 5) {
+        $(".list-group").addClass("scroll");
+      }
+      res.securedLinks.forEach((link) => {
+        $("#listSecure").append(
+          `<li class="list-group-item list-secured">${link.href}</li>`
+        );
+      });
+    }
   }
 
   function disabledButtons() {
@@ -95,9 +135,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //CLEAN ALL LINKER TEXTS
   function clean() {
+    $(".list-group-item").remove();
+    $(".list-group").removeClass("scroll");
+
+    $("#listAll").addClass("none");
     $("#txtAll").addClass("none");
+
     $("#txtUnsecure").addClass("none");
+    $("#listSecure").addClass("none");
+
     $("#txtSecure").addClass("none");
+    $("#listUnsecure").addClass("none");
+
+    $("#btnAll").removeClass("btn-focus");
+    $("#btnSecure").removeClass("btn-focus");
+    $("#btnUnsecure").removeClass("btn-focus");
+
     $("#loadingUnsecure").addClass("none");
     $("#loadingSecure").addClass("none");
     $("#loadingAll").addClass("none");

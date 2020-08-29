@@ -73,6 +73,8 @@
           </button>
         </div>
       </div>
+      <!-- ALERTS OF TITLES -->
+      <div id="titleTab" class="alert alert-primary" role="alert"></div>
       <!-- LOADERS -->
       <div
         id="loadingUnsecure"
@@ -91,10 +93,10 @@
       <div id="loadingAll" class="spinner-grow text-primary none" role="status">
         <span class="sr-only">Loading...</span>
       </div>
-      <!-- ALERTS OF LINKS -->
-      <div id="txtAll" class="alert alert-primary none" role="alert"></div>
-      <div id="txtUnsecure" class="alert alert-danger none" role="alert"></div>
-      <div id="txtSecure" class="alert alert-success none" role="alert"></div>
+      <!-- TABLE OF LINKS -->
+      <ul class="list-group" id="listAll"></ul>
+      <ul class="list-group" id="listSecure"></ul>
+      <ul class="list-group" id="listUnsecure"></ul>
     </div>
     <script src="jquery.js"></script>
     <script src="popup.js"></script>
