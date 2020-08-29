@@ -1,21 +1,27 @@
 .container {
   width: 300px;
-  height: 200px;
   margin: 0px;
+  padding: 0px;
+  border: 1px solid #007bff;
+  text-align: center;
+}
+.col-4 {
   padding: 0px;
 }
 .none {
   display: none;
 }
 .btn_linker {
-  border: none;
   padding: 10px 0px;
-  border-radius: 3px;
   font-weight: lighter;
   width: 100%;
   text-align: center;
   text-decoration: none;
-  outline: none;
+  outline: none !important;
+  border: 0.3px solid white;
+}
+.btn_linker:focus {
+  background: gainsboro !important;
 }
 .red {
   color: mediumvioletred;
@@ -23,9 +29,9 @@
 .blue {
   color: mediumvioletred;
 }
+.green {
+  color: green;
+}
 .alert {
-  position: absolute !important;
-  bottom: 0px !important;
-  width: 100% !important;
   margin: 0px !important;
 }
