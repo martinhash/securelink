@@ -8,7 +8,11 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector("#btnSecure")
     .addEventListener("click", getSecureLinks, false);
-
+  var title;
+  chrome.tabs.getSelected(null, function (tab) {
+    title = tab.title;
+    console.log(title, className);
+  });
   //ALL LINKS FUNCTION
   function getAllLinks() {
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
@@ -24,9 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
       $("#loadingAll").addClass("none");
       $("#txtAll").removeClass("none");
       if (res) {
-        $("#txtAll").html(`This page have ${res.count} Links`);
+        $("#txtAll").html(`<b>${title}</b> <br> Total of ${res.count} Links`);
       } else {
-        $("#txtAll").html(`This page not have links`);
+        $("#txtAll").html(`<b>${title}</b> <br> not have links`);
       }
     }, 1000);
   }
@@ -46,9 +50,11 @@ document.addEventListener("DOMContentLoaded", function () {
       $("#loadingUnsecure").addClass("none");
       $("#txtUnsecure").removeClass("none");
       if (res) {
-        $("#txtUnsecure").html(`This page have ${res.count} Unsecure Links`);
+        $("#txtUnsecure").html(
+          `<b>${title}</b> <br> ${res.count} Unsecure Links`
+        );
       } else {
-        $("#txtUnsecure").html(`This page not have links`);
+        $("#txtUnsecure").html(`<b>${title}</b> <br> not have links`);
       }
     }, 1000);
   }
@@ -68,9 +74,9 @@ document.addEventListener("DOMContentLoaded", function () {
       $("#loadingSecure").addClass("none");
       $("#txtSecure").removeClass("none");
       if (res) {
-        $("#txtSecure").html(`This page have ${res.count} Secure Links`);
+        $("#txtSecure").html(`<b>${title}</b> <br> ${res.count} Secure Links`);
       } else {
-        $("#txtSecure").html(`This page not have links`);
+        $("#txtSecure").html(`<b>${title}</b> <br> not have links`);
       }
     }, 1000);
   }
