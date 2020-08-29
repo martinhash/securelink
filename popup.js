@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .querySelector("#btnSecure")
     .addEventListener("click", getSecureLinks, false);
   var title;
-  getAllLinks();
+  getUnsecuresIfExist();
   chrome.tabs.getSelected(null, function (tab) {
     title = tab.title;
     $("#titleTab").html(
@@ -19,6 +19,23 @@ document.addEventListener("DOMContentLoaded", function () {
       padding: 0px;">${title}</b>`
     );
   });
+
+  function getUnsecuresIfExist() {
+    clean();
+    disabledButtons();
+    $("#loadingUnsecure").removeClass("none");
+    setTimeout(() => {
+      chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, "all", startCount);
+      });
+    }, 1000);
+  }
+
+  function startCount(res) {
+    if (res.unsecuredLinks.length > 0) {
+      getUnsecureLinks();
+    }
+  }
   //ALL LINKS FUNCTIONS
   function getAllLinks() {
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
