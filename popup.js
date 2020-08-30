@@ -9,9 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector("#btnSecure")
     .addEventListener("click", getSecureLinks, false);
-  document
-    .querySelector("#blockUnsegureLinks")
-    .addEventListener("click", blockUnsecured, false);
   var title;
   var isPageSafe;
   chrome.tabs.getSelected(null, function (tab) {
