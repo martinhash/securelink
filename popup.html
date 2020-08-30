@@ -13,28 +13,34 @@
 
   <body>
     <div class="container">
-      <span
-        class="d-block p-2 text-white font-weight-light"
-        style="text-align: center; background-color: #00b1b9"
-      >
-        <div style="font-size: 1.2em">SAFE LINKS</div>
+      <span class="d-block p-2 text-white font-weight-light">
+        <div style="font-size: 1.2em; text-shadow: 2px 2px 2px black">
+          SAFE LINKS
+        </div>
         <div>
-          <img
-            src="./images/nav.png"
-            style="
-              position: absolute;
-              right: 0px;
-              top: 3px;
-              width: 38px;
-              height: 38px;
-            "
-          />
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            class="bi bi-bug-fill logo_nav"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.978.855a.5.5 0 1 0-.956.29l.41 1.352A4.985 4.985 0 0 0 3 6h10a4.985 4.985 0 0 0-1.432-3.503l.41-1.352a.5.5 0 1 0-.956-.29l-.291.956A4.978 4.978 0 0 0 8 1a4.979 4.979 0 0 0-2.731.811l-.29-.956zM13 6v1H8.5v8.975A5 5 0 0 0 13 11h.5a.5.5 0 0 1 .5.5v.5a.5.5 0 1 0 1 0v-.5a1.5 1.5 0 0 0-1.5-1.5H13V9h1.5a.5.5 0 0 0 0-1H13V7h.5A1.5 1.5 0 0 0 15 5.5V5a.5.5 0 0 0-1 0v.5a.5.5 0 0 1-.5.5H13zm-5.5 9.975V7H3V6h-.5a.5.5 0 0 1-.5-.5V5a.5.5 0 0 0-1 0v.5A1.5 1.5 0 0 0 2.5 7H3v1H1.5a.5.5 0 0 0 0 1H3v1h-.5A1.5 1.5 0 0 0 1 11.5v.5a.5.5 0 1 0 1 0v-.5a.5.5 0 0 1 .5-.5H3a5 5 0 0 0 4.5 4.975z"
+            />
+          </svg>
         </div>
       </span>
       <!-- BUTTONS -->
-      <div class="row" style="margin: 1px">
+      <div class="row">
         <div class="col-4">
-          <button id="btnUnsecure" type="button" class="btn_linker red">
+          <button
+            id="btnUnsecure"
+            type="button"
+            class="btn_linker btn_linker__hover"
+          >
             <svg
               width="1.3em"
               height="1.3em"
@@ -51,7 +57,11 @@
           </button>
         </div>
         <div class="col-4">
-          <button id="btnSecure" type="button" class="btn_linker green">
+          <button
+            id="btnSecure"
+            type="button"
+            class="btn_linker btn_linker__hover"
+          >
             <svg
               width="1.3em"
               height="1.3em"
@@ -68,7 +78,11 @@
           </button>
         </div>
         <div class="col-4">
-          <button id="btnAll" type="button" class="btn_linker primary">
+          <button
+            id="btnAll"
+            type="button"
+            class="btn_linker btn_linker__hover"
+          >
             All
           </button>
         </div>
@@ -76,27 +90,61 @@
       <!-- ALERTS OF TITLES -->
       <div id="titleTab" class="alert alert-primary" role="alert"></div>
       <!-- LOADERS -->
-      <div
-        id="loadingUnsecure"
-        class="spinner-grow text-danger none"
-        role="status"
-      >
-        <span class="sr-only">Loading...</span>
-      </div>
-      <div
-        id="loadingSecure"
-        class="spinner-grow text-success none"
-        role="status"
-      >
-        <span class="sr-only">Loading...</span>
-      </div>
-      <div id="loadingAll" class="spinner-grow text-primary none" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
+      <div id="loadingUnsecure" class="loader insafe"></div>
+      <div id="loadingSecure" class="loader safe"></div>
+      <div id="loadingAll" class="loader primary"></div>
       <!-- TABLE OF LINKS -->
       <ul class="list-group" id="listAll"></ul>
       <ul class="list-group" id="listSecure"></ul>
       <ul class="list-group" id="listUnsecure"></ul>
+      <!-- PAGE ADVISORYS -->
+      <div id="cleanPage" class="none advisory">
+        <div class="appear">
+          This website is all Clean
+          <br />
+          <br />
+          <svg
+            width="2em"
+            height="2em"
+            viewBox="0 0 16 16"
+            class="bi bi-shield-check advisory__logo advisory__logo-safepage"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            id="logo-safe-page"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M5.443 1.991a60.17 60.17 0 0 0-2.725.802.454.454 0 0 0-.315.366C1.87 7.056 3.1 9.9 4.567 11.773c.736.94 1.533 1.636 2.197 2.093.333.228.626.394.857.5.116.053.21.089.282.11A.73.73 0 0 0 8 14.5c.007-.001.038-.005.097-.023.072-.022.166-.058.282-.111.23-.106.525-.272.857-.5a10.197 10.197 0 0 0 2.197-2.093C12.9 9.9 14.13 7.056 13.597 3.159a.454.454 0 0 0-.315-.366c-.626-.2-1.682-.526-2.725-.802C9.491 1.71 8.51 1.5 8 1.5c-.51 0-1.49.21-2.557.491zm-.256-.966C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815z"
+            />
+            <path
+              fill-rule="evenodd"
+              d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div id="invalidPage" class="none advisory">
+        <div class="appear">
+          This website is invalid for SAFE LINK
+          <br />
+          <br />
+          <svg
+            id="advisory__logo-invalid"
+            viewBox="0 0 16 16"
+            class="bi bi-shield-exclamation advisory__logo advisory__logo-invalid"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M5.443 1.991a60.17 60.17 0 0 0-2.725.802.454.454 0 0 0-.315.366C1.87 7.056 3.1 9.9 4.567 11.773c.736.94 1.533 1.636 2.197 2.093.333.228.626.394.857.5.116.053.21.089.282.11A.73.73 0 0 0 8 14.5c.007-.001.038-.005.097-.023.072-.022.166-.058.282-.111.23-.106.525-.272.857-.5a10.197 10.197 0 0 0 2.197-2.093C12.9 9.9 14.13 7.056 13.597 3.159a.454.454 0 0 0-.315-.366c-.626-.2-1.682-.526-2.725-.802C9.491 1.71 8.51 1.5 8 1.5c-.51 0-1.49.21-2.557.491zm-.256-.966C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815z"
+            />
+            <path
+              d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"
+            />
+          </svg>
+        </div>
+      </div>
     </div>
     <script src="jquery.js"></script>
     <script src="popup.js"></script>

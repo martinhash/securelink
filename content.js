@@ -1,7 +1,6 @@
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   var allTags = document.body.getElementsByTagName("a");
   var result = obtainLinks(allTags);
-  console.log(result);
   if (request === "all") {
     sendResponse({
       securedLinks: result.securedLinks,

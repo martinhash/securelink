@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .querySelector("#btnSecure")
     .addEventListener("click", getSecureLinks, false);
   var title;
-  getUnsecuresIfExist();
+  var isPageSafe;
   chrome.tabs.getSelected(null, function (tab) {
     title = tab.title;
     $("#titleTab").html(
@@ -20,10 +20,12 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   });
 
+  getUnsecuresIfExist();
+
   function getUnsecuresIfExist() {
     clean();
     disabledButtons();
-    $("#loadingUnsecure").removeClass("none");
+    $("#loadingAll").removeClass("none");
     setTimeout(() => {
       chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
         chrome.tabs.sendMessage(tabs[0].id, "all", startCount);
@@ -32,9 +34,31 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function startCount(res) {
+    // IF INVALID WEBSITE OR NOT CHARGE YET TO TIME
+    if (res == undefined) {
+      clean();
+      disabledButtons();
+      $("#invalidPage").removeClass("none");
+      $("#btnSecure").removeClass("btn_linker__hover");
+      $("#btnUnsecure").removeClass("btn_linker__hover");
+      $("#btnAll").removeClass("btn_linker__hover");
+    }
+    var totalLinks = res.unsecuredLinks.length + res.securedLinks.length;
+    $("#btnAll").html(`All (${totalLinks})`);
     if (res.unsecuredLinks.length > 0) {
       getUnsecureLinks();
+    } else {
+      pageSafe();
     }
+  }
+
+  function pageSafe() {
+    clean();
+    enabledButtons();
+    isPageSafe = true;
+    $("#btnUnsecure").removeClass("btn_linker__hover");
+    $("#btnUnsecure").attr("disabled", true);
+    $("#cleanPage").removeClass("none");
   }
   //ALL LINKS FUNCTIONS
   function getAllLinks() {
@@ -52,7 +76,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1000);
   }
   function appearAllStuff(res) {
-    $("#btnAll").addClass("btn-focus");
+    $("#btnAll").addClass("active");
+    $("#btnAll").removeClass("btn_linker__hover");
     $("#loadingAll").addClass("none");
     $("#listAll").removeClass("none");
     if (res.unsecuredLinks.length > 0) {
@@ -91,7 +116,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function appearUnsecureStuff(res) {
-    $("#btnUnsecure").addClass("btn-focus");
+    $("#btnUnsecure").addClass("active");
+    $("#btnUnsecure").removeClass("btn_linker__hover");
     $("#loadingUnsecure").addClass("none");
     $("#listUnsecure").removeClass("none");
     if (res.unsecuredLinks.length > 0) {
@@ -123,7 +149,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function appearSecureStuff(res) {
-    $("#btnSecure").addClass("btn-focus");
+    $("#btnSecure").addClass("active");
+    $("#btnSecure").removeClass("btn_linker__hover");
     $("#loadingSecure").addClass("none");
     $("#listSecure").removeClass("none");
     if (res.securedLinks.length > 0) {
@@ -145,7 +172,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function enabledButtons() {
-    $("#btnUnsecure").attr("disabled", false);
+    if (!isPageSafe) {
+      $("#btnUnsecure").attr("disabled", false);
+    } else {
+      $("#btnUnsecure").removeClass("btn_linker__hover");
+      $("#btnUnsecure").attr("disabled", true);
+    }
     $("#btnSecure").attr("disabled", false);
     $("#btnAll").attr("disabled", false);
   }
@@ -164,12 +196,18 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#txtSecure").addClass("none");
     $("#listUnsecure").addClass("none");
 
-    $("#btnAll").removeClass("btn-focus");
-    $("#btnSecure").removeClass("btn-focus");
-    $("#btnUnsecure").removeClass("btn-focus");
+    $("#btnAll").removeClass("active");
+    $("#btnSecure").removeClass("active");
+    $("#btnUnsecure").removeClass("active");
+
+    $("#btnAll").addClass("btn_linker__hover");
+    $("#btnSecure").addClass("btn_linker__hover");
+    $("#btnUnsecure").addClass("btn_linker__hover");
 
     $("#loadingUnsecure").addClass("none");
     $("#loadingSecure").addClass("none");
     $("#loadingAll").addClass("none");
+
+    $("#cleanPage").addClass("none");
   }
 });
