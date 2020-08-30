@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 var allTags = document.body.getElementsByTagName("a");
 var result = obtainLinks(allTags);
 if (result.unsecuredLinks.length > 0) {
-  //icono rokjo
+  chrome.runtime.sendMessage({ action: "unsecured" });
 }
 
 function obtainLinks(allTags) {

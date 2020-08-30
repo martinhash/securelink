@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector("#btnSecure")
     .addEventListener("click", getSecureLinks, false);
+  document
+    .querySelector("#blockUnsegureLinks")
+    .addEventListener("click", blockUnsecured, false);
   var title;
   var isPageSafe;
   chrome.tabs.getSelected(null, function (tab) {
@@ -120,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#btnUnsecure").removeClass("btn_linker__hover");
     $("#loadingUnsecure").addClass("none");
     $("#listUnsecure").removeClass("none");
+    $("#blockUnsecures").removeClass("none");
     if (res.unsecuredLinks.length > 0) {
       if (res.unsecuredLinks.length > 5) {
         $(".list-group").addClass("scroll");
@@ -182,6 +186,8 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#btnAll").attr("disabled", false);
   }
 
+  function blockUnsecured() {}
+
   //CLEAN ALL LINKER TEXTS
   function clean() {
     $(".list-group-item").remove();
@@ -192,6 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     $("#txtUnsecure").addClass("none");
     $("#listSecure").addClass("none");
+    $("#blockUnsecures").addClass("none");
 
     $("#txtSecure").addClass("none");
     $("#listUnsecure").addClass("none");
