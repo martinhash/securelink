@@ -38,6 +38,7 @@ body {
   background: #3c5998;
   color: white;
   transition-duration: 0.3s;
+  border-bottom: 3px solid transparent;
 }
 .btn_linker[disabled] {
   opacity: 0.4;
@@ -64,12 +65,13 @@ body {
 }
 .list-group {
   border-radius: 0px;
+  text-align: left;
 }
 .list-group-item {
   font-size: 0.8em;
 }
 .list-secured {
-  background: lightgreen;
+  background: #caffca;
 }
 .list-unsecured {
   background: peachpuff;
@@ -78,11 +80,13 @@ body {
   margin: 0px !important;
   border-radius: 0px !important;
   padding: 0px;
-  background: #098991;
-  color: white;
-  border: solid #098991;
+  background: white;
+  color: #3c5998;
+  border: solid white;
   font-weight: 300;
   animation: 1s fade 1;
+  box-shadow: -1px 1px 3px 0px #585858;
+  z-index: 100;
 }
 .active {
   border-bottom: 3px solid white;
@@ -115,8 +119,19 @@ body {
 }
 .logo_nav {
   color: white;
-  animation: 3s fade 1;
+  animation: 2s fadeLogo 1;
   transition-duration: 0.3s;
+}
+@keyframes fadeLogo {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 @keyframes fade {
   0% {
