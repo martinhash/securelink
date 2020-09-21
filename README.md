@@ -10,7 +10,15 @@ All features created from scratch, without UI libraries.
 
 ##### :lock: Safe Links
 
+![Alt text](images/linkssafes.PNG "Safe")
+
+##### :lock: Safe Pages
+
 ![Alt text](images/safelinks.PNG "Safe")
+
+##### :lock: Automathic disabled Unsafe Links!
+
+![Alt text](images/linkdisabled.PNG "Safe")
 
 ## Authors
 
